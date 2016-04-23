@@ -1,5 +1,6 @@
 {
-  "name": "Edit in Vim",
+  "name": "vim-edit",
+  "title": "Edit in Vim",
   "main": "./lib/main",
   "version": "0.1.0",
   "repository": {
