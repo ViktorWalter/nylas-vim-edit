@@ -1,6 +1,7 @@
-import {ComponentRegistry} from 'nylas-exports';
+import {PreferencesUIStore, ComponentRegistry} from 'nylas-exports';
 
 import VimButton from './vim-button';
+import PreferencesVim from './preferences-vim'
 
 // Activate is called when the package is loaded. If your package previously
 // saved state using `serialize` it is provided.
@@ -9,6 +10,13 @@ export function activate() {
   ComponentRegistry.register(VimButton, {
     role: 'Composer:ActionButton',
   });
+
+  this.preferencesTab = new PreferencesUIStore.TabItem({
+    tabId: 'Edit in Vim',
+    displayName: 'Edit in Vim',
+    component: require('./preferences-vim'),
+  });
+  PreferencesUIStore.registerPreferencesTab(this.preferencesTab);
 }
 
 // Serialize is called when your package is about to be unmounted.
