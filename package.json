@@ -1,0 +1,21 @@
+{
+  "name": "Edit in Vim",
+  "main": "./lib/main",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "nylas": ">=0.4.25"
+  },
+  "windowTypes": {
+    "default": true,
+    "composer": true
+  },
+  "description": "Edit your email in Vim",
+  "dependencies": {
+    "temp": ">=0.8.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,42 @@
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.activate = activate;
+exports.serialize = serialize;
+exports.deactivate = deactivate;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _nylasExports = require('nylas-exports');
+
+var _myComposerButton = require('./vim-button');
+
+var _myComposerButton2 = _interopRequireDefault(_myComposerButton);
+
+// Activate is called when the package is loaded. If your package previously
+// saved state using `serialize` it is provided.
+//
+
+function activate() {
+  _nylasExports.ComponentRegistry.register(_myComposerButton2['default'], {
+    role: 'Composer:ActionButton'
+  });
+}
+
+// Serialize is called when your package is about to be unmounted.
+// You can return a state object that will be passed back to your package
+// when it is re-activated.
+//
+
+function serialize() {}
+
+// This **optional** method is called when the window is shutting down,
+// or when your package is being updated or disabled. If your package is
+// watching any files, holding external resources, providing commands or
+// subscribing to events, release them here.
+//
+
+function deactivate() {
+  _nylasExports.ComponentRegistry.unregister(_myComposerButton2['default']);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL2hvbWUvdHJhdmlzL2J1aWxkL255bGFzL04xL3N0YXRpYy9wYWNrYWdlLXRlbXBsYXRlL2xpYi9tYWluLmVzNiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7NEJBQWdDLGVBQWU7O2dDQUVsQixzQkFBc0I7Ozs7Z0NBQ3RCLHNCQUFzQjs7Ozs7Ozs7QUFLNUMsU0FBUyxRQUFRLEdBQUc7QUFDekIsa0NBQWtCLFFBQVEsZ0NBQW1CO0FBQzNDLFFBQUksRUFBRSx1QkFBdUI7R0FDOUIsQ0FBQyxDQUFDO0FBQ0gsa0NBQWtCLFFBQVEsZ0NBQW1CO0FBQzNDLFFBQUksRUFBRSxnQ0FBZ0M7R0FDdkMsQ0FBQyxDQUFDO0NBQ0o7Ozs7Ozs7QUFNTSxTQUFTLFNBQVMsR0FBRyxFQUMzQjs7Ozs7Ozs7QUFPTSxTQUFTLFVBQVUsR0FBRztBQUMzQixrQ0FBa0IsVUFBVSwrQkFBa0IsQ0FBQztBQUMvQyxrQ0FBa0IsVUFBVSwrQkFBa0IsQ0FBQztDQUNoRCIsImZpbGUiOiJtYWluLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtDb21wb25lbnRSZWdpc3RyeX0gZnJvbSAnbnlsYXMtZXhwb3J0cyc7XG5cbmltcG9ydCBNeUNvbXBvc2VyQnV0dG9uIGZyb20gJy4vbXktY29tcG9zZXItYnV0dG9uJztcbmltcG9ydCBNeU1lc3NhZ2VTaWRlYmFyIGZyb20gJy4vbXktbWVzc2FnZS1zaWRlYmFyJztcblxuLy8gQWN0aXZhdGUgaXMgY2FsbGVkIHdoZW4gdGhlIHBhY2thZ2UgaXMgbG9hZGVkLiBJZiB5b3VyIHBhY2thZ2UgcHJldmlvdXNseVxuLy8gc2F2ZWQgc3RhdGUgdXNpbmcgYHNlcmlhbGl6ZWAgaXQgaXMgcHJvdmlkZWQuXG4vL1xuZXhwb3J0IGZ1bmN0aW9uIGFjdGl2YXRlKCkge1xuICBDb21wb25lbnRSZWdpc3RyeS5yZWdpc3RlcihNeUNvbXBvc2VyQnV0dG9uLCB7XG4gICAgcm9sZTogJ0NvbXBvc2VyOkFjdGlvbkJ1dHRvbicsXG4gIH0pO1xuICBDb21wb25lbnRSZWdpc3RyeS5yZWdpc3RlcihNeU1lc3NhZ2VTaWRlYmFyLCB7XG4gICAgcm9sZTogJ01lc3NhZ2VMaXN0U2lkZWJhcjpDb250YWN0Q2FyZCcsXG4gIH0pO1xufVxuXG4vLyBTZXJpYWxpemUgaXMgY2FsbGVkIHdoZW4geW91ciBwYWNrYWdlIGlzIGFib3V0IHRvIGJlIHVubW91bnRlZC5cbi8vIFlvdSBjYW4gcmV0dXJuIGEgc3RhdGUgb2JqZWN0IHRoYXQgd2lsbCBiZSBwYXNzZWQgYmFjayB0byB5b3VyIHBhY2thZ2Vcbi8vIHdoZW4gaXQgaXMgcmUtYWN0aXZhdGVkLlxuLy9cbmV4cG9ydCBmdW5jdGlvbiBzZXJpYWxpemUoKSB7XG59XG5cbi8vIFRoaXMgKipvcHRpb25hbCoqIG1ldGhvZCBpcyBjYWxsZWQgd2hlbiB0aGUgd2luZG93IGlzIHNodXR0aW5nIGRvd24sXG4vLyBvciB3aGVuIHlvdXIgcGFja2FnZSBpcyBiZWluZyB1cGRhdGVkIG9yIGRpc2FibGVkLiBJZiB5b3VyIHBhY2thZ2UgaXNcbi8vIHdhdGNoaW5nIGFueSBmaWxlcywgaG9sZGluZyBleHRlcm5hbCByZXNvdXJjZXMsIHByb3ZpZGluZyBjb21tYW5kcyBvclxuLy8gc3Vic2NyaWJpbmcgdG8gZXZlbnRzLCByZWxlYXNlIHRoZW0gaGVyZS5cbi8vXG5leHBvcnQgZnVuY3Rpb24gZGVhY3RpdmF0ZSgpIHtcbiAgQ29tcG9uZW50UmVnaXN0cnkudW5yZWdpc3RlcihNeUNvbXBvc2VyQnV0dG9uKTtcbiAgQ29tcG9uZW50UmVnaXN0cnkudW5yZWdpc3RlcihNeU1lc3NhZ2VTaWRlYmFyKTtcbn1cbiJdfQ==
