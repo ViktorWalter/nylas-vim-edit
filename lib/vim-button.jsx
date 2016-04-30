@@ -1,4 +1,5 @@
 import {DraftStore, React} from 'nylas-exports';
+import {RegExpUtils} from 'nylas-exports'
 import PreferencesStore from './preferences-store'
 
 export default class VimButton extends React.Component {
@@ -14,15 +15,33 @@ export default class VimButton extends React.Component {
     draftClientId: React.PropTypes.string.isRequired,
   };
 
+  // Convert byte-array into string
+  _uintToString = (uintArray) => {
+      var encodedString = String.fromCharCode.apply(null, uintArray),
+          decodedString = decodeURIComponent(escape(encodedString));
+      return decodedString;
+  }
+
+  _processBody = (body) => {
+    const newBody = this._uintToString(body);
+
+    // Split the body into new parts: after and before the signature
+    // Treat "before" as regular text and insert al the brs and whatnot
+    // Treat "after" as is
+    const signatureRegex = RegExpUtils.signatureRegex();
+    let signaturePoint = newBody.search(signatureRegex)
+    beforeSignature = newBody.slice(0, signaturePoint);
+    const afterSignature = newBody.slice(signaturePoint);
+
+    // convert regular new-lines into the HTML new lines
+    beforeSignature = beforeSignature.replace(/\r\n|\n|\r/g, '<br />');
+
+    return beforeSignature + afterSignature;
+  }
+
   _onClick = () => {
     // Fetch the current editing session from the draft store
     DraftStore.sessionForClientId(this.props.draftClientId).then((session) => {
-      var uintToString = (uintArray) => {
-          var encodedString = String.fromCharCode.apply(null, uintArray),
-              decodedString = decodeURIComponent(escape(encodedString));
-          return decodedString;
-      };
-
       var terminal = PreferencesStore.getTerminal();
       var temp = require("temp");
       var fs = require("fs");
@@ -41,6 +60,7 @@ export default class VimButton extends React.Component {
 
         // Write the current message body into the file
         fs.write(info.fd, messageBody);
+        console.log(messageBody);
 
         // Close the file and perform all that necessary
         fs.close(info.fd, (error) => {
@@ -52,13 +72,11 @@ export default class VimButton extends React.Component {
           var vim = spawn(terminal, ["-e", `vim ${info.path}`]);
 
           vim.on("close", (rc) => {
-              // Convert byte-array into string and then 
-              // convert regular new-lines into the HTML new lines
-              const newBody = uintToString(fs.readFileSync(info.path))
-                .replace(/\r\n|\n|\r/g, '<br />');
+              newBody = this._processBody(fs.readFileSync(info.path));
 
               // Put the new message back again
               session.changes.add({body: newBody});
+              console.log(newBody)
           });
 
         });
