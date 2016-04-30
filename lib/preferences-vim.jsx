@@ -1,6 +1,5 @@
 import {React} from 'nylas-exports';
 import PreferencesStore from './preferences-store'
-import {Contenteditable} from 'nylas-component-kit';
 
 class PreferencesVim extends React.Component {
   static displayName = 'PreferencesVim';
@@ -10,27 +9,29 @@ class PreferencesVim extends React.Component {
   }
 
   _onEditTerminal = (event) => {
-      const newTerminal = event.target.value;
-      PreferencesStore.setTerminal(newTerminal);
+    const newTerminal = event.target.value;
+    PreferencesStore.setTerminal(newTerminal);
   }
 
   _renderTerminalEdit() {
     const terminal = PreferencesStore.getTerminal();
     return (
-        <Contenteditable
+        <div>
+          <h3>Terminal emulator</h3>
+          <input
+            type="text"
             value={terminal}
             onChange={this._onEditTerminal}
-        />
-        );
+          />
+        </div>
+      );
   }
 
   render() {
     return (
-      <div>
-        <section>
-          {this._renderTerminalEdit()}
-        </section>
-      </div>
+    <section className="container-preferences-vim">
+      {this._renderTerminalEdit()}
+    </section>
     );
   }
 
