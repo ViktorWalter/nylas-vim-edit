@@ -2,6 +2,7 @@ import {PreferencesUIStore, ComponentRegistry} from 'nylas-exports';
 
 import VimButton from './vim-button';
 import PreferencesVim from './preferences-vim'
+import PreferencesStore from './preferences-store'
 
 // Activate is called when the package is loaded. If your package previously
 // saved state using `serialize` it is provided.
@@ -17,6 +18,8 @@ export function activate() {
     component: require('./preferences-vim'),
   });
   PreferencesUIStore.registerPreferencesTab(this.preferencesTab);
+
+  PreferencesStore.activate();
 }
 
 // Serialize is called when your package is about to be unmounted.
@@ -33,4 +36,5 @@ export function serialize() {
 //
 export function deactivate() {
   ComponentRegistry.unregister(VimButton);
+  PreferencesStore.deactivate();
 }

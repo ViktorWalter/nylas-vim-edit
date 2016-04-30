@@ -1,4 +1,5 @@
 import {DraftStore, React} from 'nylas-exports';
+import PreferencesStore from './preferences-store'
 
 export default class VimButton extends React.Component {
 
@@ -22,10 +23,12 @@ export default class VimButton extends React.Component {
           return decodedString;
       };
 
+      var terminal = PreferencesStore.getTerminal();
       var temp = require("temp");
       var fs = require("fs");
       var spawn = require('child_process').spawn;
-      const messageBody = session.draft().plainTextBody();
+      //const messageBody = session.draft().plainTextBody();
+      const messageBody = session.draft().body;
 
       // Automatically track and cleanup files at exit
       temp.track();
@@ -46,7 +49,7 @@ export default class VimButton extends React.Component {
           }
 
           // Edit the temporary file with vim
-          var vim = spawn("termite", ["-e", `vim ${info.path}`]);
+          var vim = spawn(terminal, ["-e", `vim ${info.path}`]);
 
           vim.on("close", (rc) => {
               // Convert byte-array into string and then 
