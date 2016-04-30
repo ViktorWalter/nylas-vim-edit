@@ -6,16 +6,6 @@ class PreferencesStore {
     this.unsubscribes = [];
   }
 
-  activate() {
-    //this.unsubscribes.push(
-      //SignatureActions.setSignatureForAccountId.listen(this._onSetSignatureForAccountId)
-    //);
-  }
-
-  deactivate() {
-    //this.unsubscribes.forEach(unsub => unsub());
-  }
-
   getTerminal() {
     const saved = NylasEnv.config.get(`vim-edit.terminal`);
     if (saved === undefined) {
@@ -24,7 +14,7 @@ class PreferencesStore {
     return saved;
   }
 
-  _onSetTerminal = (terminal) => {
+  setTerminal(terminal) {
     NylasEnv.config.set(`vim-edit.terminal`, terminal)
   }
 }

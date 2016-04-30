@@ -18,8 +18,6 @@ export function activate() {
     component: require('./preferences-vim'),
   });
   PreferencesUIStore.registerPreferencesTab(this.preferencesTab);
-
-  PreferencesStore.activate();
 }
 
 // Serialize is called when your package is about to be unmounted.
@@ -36,5 +34,4 @@ export function serialize() {
 //
 export function deactivate() {
   ComponentRegistry.unregister(VimButton);
-  PreferencesStore.deactivate();
 }
