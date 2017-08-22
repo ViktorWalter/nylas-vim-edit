@@ -29,15 +29,19 @@ export default class VimButton extends React.Component {
     // Treat "before" as regular text and insert al the brs and whatnot
     // Treat "after" as is
     const signatureRegex = RegExpUtils.signatureRegex();
+    // const signaturePoint = signatureRegex.exec(this.props.draft.body)
     let signaturePoint = newBody.search(signatureRegex)
-    beforeSignature = newBody.slice(0, signaturePoint);
+    var beforeSignature = newBody.slice(0, signaturePoint);
     const afterSignature = newBody.slice(signaturePoint);
 
     // convert regular new-lines into the HTML new lines
     beforeSignature = beforeSignature.replace(/\r\n|\n|\r/g, '<br />');
 
-    return beforeSignature + afterSignature;
+    const outputBody = (beforeSignature + afterSignature);
+
+    return outputBody;
   }
+
 
   _onClick = () => {
     // Fetch the current editing session from the draft store
@@ -53,7 +57,7 @@ export default class VimButton extends React.Component {
       temp.track();
 
       // Open temporary file
-      temp.open("n1-vim-", (error, info) => {
+      temp.open("nylas-vim-", (error, info) => {
         if(error) {
           throw error;
         }
@@ -69,10 +73,10 @@ export default class VimButton extends React.Component {
           }
 
           // Edit the temporary file with vim
-          var vim = spawn(terminal, ["-e", `vim ${info.path}`]);
+          var vim = spawn(terminal, [`-e`, `vim`, `${info.path}`]);
 
           vim.on("close", (rc) => {
-              newBody = this._processBody(fs.readFileSync(info.path));
+          const newBody = this._processBody(fs.readFileSync(info.path));
 
               // Put the new message back again
               session.changes.add({body: newBody});

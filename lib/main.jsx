@@ -1,4 +1,5 @@
 import {PreferencesUIStore, ComponentRegistry} from 'nylas-exports';
+import {mousetrap} from 'mousetrap';
 
 import VimButton from './vim-button';
 import PreferencesVim from './preferences-vim'
@@ -18,6 +19,7 @@ export function activate() {
     component: require('./preferences-vim'),
   });
   PreferencesUIStore.registerPreferencesTab(this.preferencesTab);
+
 }
 
 // Serialize is called when your package is about to be unmounted.

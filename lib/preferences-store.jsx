@@ -1,6 +1,6 @@
 class PreferencesStore {
 
-  DefaultTerminal = "termite";
+  DefaultTerminal = "urxvt";
 
   constructor() {
     this.unsubscribes = [];
